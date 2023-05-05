@@ -22,15 +22,10 @@ namespace toDo {
 
 namespace song {
     struct Songs {
-        char titleSongs[50];
-        char authorSongs[50];
-        char textSongs[100];
-        const char* songFile1 = "Songs1.txt";
-        const char* songFile2 = "Songs2.txt";
-        const char* songFile3 = "Songs3.txt";
-        const char* songFile4 = "Songs4.txt";
-        const char* songFile5 = "Songs5.txt";
-        int  yearOfTheSongs;
+        char titleSongs[50]{0};
+        char authorSongs[50]{0};
+        char songFile[255]{0};
+        int  yearOfTheSongs{0};
     };
 
     void addSongs(Songs song[], int SIZE, const char* songFile);

@@ -125,7 +125,7 @@ int main()
     setlocale(LC_ALL, "rus");
     int SIZE = 5;
     song::Songs song[5];
-    const char* songFile = "Songs1.txt";
+    const char* songFile = "Songs.txt";
 
     cout << "\n++++++++++++++++++++++++++++++++++Сборник песен!++++++++++++++++++++++++++++++++++\n";
     cout << "\n---------------------------------------MENU---------------------------------------\n";

@@ -348,7 +348,7 @@ namespace song {
                 gets_s(song[i].authorSongs, 50);
                 cout << "Введите текст песни: ";
                 cin >> ws;
-                gets_s(song[i].textSongs, 900);
+                gets_s(song[i].songFile, 255);
                 cout << "Введите год выхода песни: ";
                 cin >> ws;
                 cin >> song[i].yearOfTheSongs;
@@ -356,7 +356,7 @@ namespace song {
                 cin >> stop;
                 fprintf(fSong, "%s\n", song[i].titleSongs);
                 fprintf(fSong, "%s\n", song[i].authorSongs);
-                fprintf(fSong, "%s\n", song[i].textSongs);
+                fprintf(fSong, "%s\n", song[i].songFile);
                 fprintf(fSong, "%i\n", song[i].yearOfTheSongs);
                 i++;
             } while (stop != 0);
@@ -377,12 +377,12 @@ namespace song {
         for (int i = 0; i < SIZE; i++) {
             fgets(song[i].titleSongs, 50, Rsong);
             fgets(song[i].authorSongs, 50, Rsong);
-            fgets(song[i].textSongs, 100, Rsong);
+            fgets(song[i].songFile, 100, Rsong);
             fscanf(Rsong, "%i\n ", song[i].yearOfTheSongs);
             cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
             cout << "\tНазвание песни: " << song[i].titleSongs <<
                 "\nАвтор песни: " << song[i].authorSongs <<
-                "\n       Текст песни: " << song[i].textSongs <<
+                "\n       Текст песни: " << song[i].songFile <<
                 "\n\tГод выхода песни: " << song[i].yearOfTheSongs << endl;
             cout << "\n=====================================================================\n";
         }
@@ -400,12 +400,12 @@ namespace song {
             if (strcmp(song[i].authorSongs, title) == 0) {
                 fgets(song[i].titleSongs, 50, sf);
                 fgets(song[i].authorSongs, 50, sf);
-                fgets(song[i].textSongs, 100, sf);
+                fgets(song[i].songFile, 100, sf);
                 fscanf(sf, "%i\n ", song[i].yearOfTheSongs);
                 cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
                 cout << "\tНазвание песни: " << song[i].titleSongs <<
                     "\nАвтор песни: " << song[i].authorSongs <<
-                    "\n       Текст песни: " << song[i].textSongs <<
+                    "\n       Текст песни: " << song[i].songFile <<
                     "\n\tГод выхода песни: " << song[i].yearOfTheSongs << endl;
                 cout << "\n=====================================================================\n";
             }
