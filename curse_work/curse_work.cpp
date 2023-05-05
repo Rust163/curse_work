@@ -2,11 +2,14 @@
 #include <iostream>
 #include "windows.h"
 #include "header.h"
+//#define TODO
+#define SONGS
 using namespace std;
 
 int main()
 {
     setlocale(LC_ALL, "rus");
+#ifdef TODO
     //const int* SIZE = new int[255]{ 0 };
     int SIZE = 5;
     int left = 0;
@@ -114,5 +117,55 @@ int main()
     default:
         break;
     }
+
+#endif // TODO
     
+#ifdef SONGS
+#include "header.h"
+    setlocale(LC_ALL, "rus");
+    int SIZE = 5;
+    song::Songs song[5];
+    const char* songFile = "Songs1.txt";
+
+    cout << "\n++++++++++++++++++++++++++++++++++Сборник песен!++++++++++++++++++++++++++++++++++\n";
+    cout << "\n---------------------------------------MENU---------------------------------------\n";
+    cout << "[1]Добавление текста песни\n" <<
+        "[2]Удаление текста песни\n" <<
+        "[3]Изменение текста песни\n" <<
+        "[4]Отображение текста песни на экран\n" <<
+        "[5]Поиск и отображение всех песен одного автора\n" <<
+        "[6]Поиск песен по слову" << endl;
+    int choiseMenu;
+    cout << "Вы берите пункт меню: ";
+    cin >> choiseMenu;
+    switch (choiseMenu) {
+    case 1:
+        cout << "Введите название автора, текст песни и год издания." << endl;
+        song::addSongs(song, SIZE, songFile);
+        break;
+    case 2:
+        cout << "";
+
+        break;
+    case 3:
+        cout << "";
+
+        break;
+    case 4:
+        cout << "";
+        song::showAllSongs(song, SIZE, songFile);
+        break;
+    case 5:
+        cout << "Поиск и отображение всех песен одного автора" << endl;
+        song::findSongAuthor(song, SIZE, songFile);
+        break;
+    case 6:
+        cout << "Поиск песен.";
+
+        break;
+    default:
+        break;
+    }
+#endif // SONGS
+
 }

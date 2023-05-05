@@ -45,7 +45,7 @@ namespace toDo {
         }
         fclose(tdAppend);
     }
-    
+
     void showAllList(toDoList list[], int SIZE, const char* filePath) {
         // определяем указатель на файл
         FILE* tdOut;
@@ -76,33 +76,63 @@ namespace toDo {
     void findTaskTitle(toDoList list[], int SIZE, const char* filePath) {
         FILE* td;
         fopen_s(&td, filePath, "r");
-        char task[50];
-        cout << "\t\tВведите название задачи для поиска: ";
-        cin >> task;
-        int count = 0;
+        char title[50];
+        
+        cout << "\t\tВыберете пункт поиска задачи: ";
+        cin >> title;
         for (int i = 0; i < SIZE; i++) {
-            if (_strcmpi(list[i].title, task) == 0) {
+            if (strcmp(list[i].title, title) == 0) {
                 /*fgets(list[i].title, 50, td);
-                fscanf(td, "%i\n ", &list[i].priority);
+                fscanf(td, "%i\n ", list[i].priority);
                 fgets(list[i].description, 100, td);
                 fgets(list[i].date, 50, td);
-                fgets(list[i].time, 50, td);
+                fgets(list[i].time, 50, td);*/
                 cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
                 cout << "\tНазвание задачи:" << list[i].title <<
                     "\n       Приоритет задачи:" << list[i].priority <<
                     "\n\tОписание задачи:" << list[i].description <<
                     "\n Дата выполнения задачи:" << list[i].date <<
                     "\nВремя выполнения задачи:" << list[i].time << endl;
-                cout << "\n=====================================================================\n";*/
-                cout << "Нашел";
-                count++;
+                cout << "\n=====================================================================\n";
             }
-            else {
-                cout << "Не нашел";
+            /*else if (list[i].priority == priority) {
+                return i;
             }
+            else if (list[i].description == descr) {
+                return i;
+            }
+            else if (list[i].date == date) {
+                return i;
+            }*/
         }
+        cout << "\t\tТакая задача отсутствует! " << endl;
+        //return -1;
+
+        /* int count = 0;
+         for (int i = 0; i < SIZE; i++) {
+             if (_strcmpi(list[i].title, task) == 0) {
+                 fgets(list[i].title, 50, td);
+                 fscanf(td, "%i\n ", &list[i].priority);
+                 fgets(list[i].description, 100, td);
+                 fgets(list[i].date, 50, td);
+                 fgets(list[i].time, 50, td);
+                 cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
+                 cout << "\tНазвание задачи:" << list[i].title <<
+                     "\n       Приоритет задачи:" << list[i].priority <<
+                     "\n\tОписание задачи:" << list[i].description <<
+                     "\n Дата выполнения задачи:" << list[i].date <<
+                     "\nВремя выполнения задачи:" << list[i].time << endl;
+                 cout << "\n=====================================================================\n";
+                 cout << "Нашел";
+                 count++;
+             }
+             else {
+                 cout << "Не нашел";
+             }
+         }*/
         fclose(td);
     }
+
 
     void findTaskPriority(toDoList list[], int SIZE, const char* filePath) {
         FILE* td;
@@ -290,6 +320,94 @@ namespace toDo {
         for (int i = 0; i < SIZE; i++) {
             if (list[i].date) {
 
+            }
+        }
+    }
+}
+
+namespace song {
+
+    void addSongs(Songs song[], int SIZE, const char* songFile) {
+        FILE* fSong;
+        fopen_s(&fSong, songFile, "w");
+        int stop = 0;
+        if (!fSong) {
+            cout << "Ошибка открытия файла!";
+        }
+        int i = 0;
+        if (i >= SIZE) {
+            cout << "Список песен полон!";
+        }
+        else {
+            do {
+                cout << "Введите название песни: ";
+                cin >> ws;
+                gets_s(song[i].titleSongs, 50);
+                cout << "Введите автора песни: ";
+                cin >> ws;
+                gets_s(song[i].authorSongs, 50);
+                cout << "Введите текст песни: ";
+                cin >> ws;
+                gets_s(song[i].textSongs, 900);
+                cout << "Введите год выхода песни: ";
+                cin >> ws;
+                cin >> song[i].yearOfTheSongs;
+                cout << "Хотите добавить еще песню? [1] Да, [0] Нет.";
+                cin >> stop;
+                fprintf(fSong, "%s\n", song[i].titleSongs);
+                fprintf(fSong, "%s\n", song[i].authorSongs);
+                fprintf(fSong, "%s\n", song[i].textSongs);
+                fprintf(fSong, "%i\n", song[i].yearOfTheSongs);
+                i++;
+            } while (stop != 0);
+        }
+        fclose(fSong);
+    }
+
+    void showAllSongs(Songs song[], int SIZE, const char* songFile) {
+        // определяем указатель на файл
+        FILE* Rsong;
+
+        // открываем файл на чтение
+        fopen_s(&Rsong, songFile, "r");
+        if (!Rsong) {
+            cout << "Ошибка открытия файла!";
+        }
+        //проходим циклом и считываем данные из файла, потом выводим их на экран
+        for (int i = 0; i < SIZE; i++) {
+            fgets(song[i].titleSongs, 50, Rsong);
+            fgets(song[i].authorSongs, 50, Rsong);
+            fgets(song[i].textSongs, 100, Rsong);
+            fscanf(Rsong, "%i\n ", song[i].yearOfTheSongs);
+            cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
+            cout << "\tНазвание песни: " << song[i].titleSongs <<
+                "\nАвтор песни: " << song[i].authorSongs <<
+                "\n       Текст песни: " << song[i].textSongs <<
+                "\n\tГод выхода песни: " << song[i].yearOfTheSongs << endl;
+            cout << "\n=====================================================================\n";
+        }
+        fclose(Rsong);
+    }
+
+    void findSongAuthor(Songs song[], int SIZE, const char* songFile) {
+        FILE* sf;
+        fopen_s(&sf, songFile, "r");
+        char title[50];
+
+        cout << "\t\tВыберете пункт поиска задачи: ";
+        cin >> title;
+        for (int i = 0; i < SIZE; i++) {
+            if (strcmp(song[i].authorSongs, title) == 0) {
+                fgets(song[i].titleSongs, 50, sf);
+                fgets(song[i].authorSongs, 50, sf);
+                fgets(song[i].textSongs, 100, sf);
+                fscanf(sf, "%i\n ", song[i].yearOfTheSongs);
+                cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
+                cout << "\tНазвание песни: " << song[i].titleSongs <<
+                    "\nАвтор песни: " << song[i].authorSongs <<
+                    "\n       Текст песни: " << song[i].textSongs <<
+                    "\n\tГод выхода песни: " << song[i].yearOfTheSongs << endl;
+                cout << "\n=====================================================================\n";
             }
         }
     }

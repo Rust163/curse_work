@@ -19,3 +19,21 @@ namespace toDo {
     //int removeListElement(toDoList list[], int SIZE, const char* filePath, const char* deletedList);
     //void showBasket(toDoList list[], int SIZE, const char* deletedList);
 }
+
+namespace song {
+    struct Songs {
+        char titleSongs[50];
+        char authorSongs[50];
+        char textSongs[100];
+        const char* songFile1 = "Songs1.txt";
+        const char* songFile2 = "Songs2.txt";
+        const char* songFile3 = "Songs3.txt";
+        const char* songFile4 = "Songs4.txt";
+        const char* songFile5 = "Songs5.txt";
+        int  yearOfTheSongs;
+    };
+
+    void addSongs(Songs song[], int SIZE, const char* songFile);
+    void showAllSongs(Songs song[], int SIZE, const char* songFile);
+    void findSongAuthor(Songs song[], int SIZE, const char* songFile);
+}
