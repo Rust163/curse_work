@@ -1,7 +1,12 @@
 #pragma once
 
 namespace toDo {
+    struct GroupTask {
+        char character[50];
+    };
+
     struct toDoList {
+        GroupTask group;
         char title[50];
         int priority;
         char description[100];
@@ -9,11 +14,12 @@ namespace toDo {
         char time[50];
     };
 
-    void addList(toDoList list[], int SIZE, const char* filePath);
+    //void addList(toDoList list[], int SIZE, const char* filePath);
     void showAllList(toDoList list[], int SIZE, const char* filePath);
     void appendTasks(toDoList list[], int SIZE, const char* filePath);
     void findTaskTitle(toDoList list[], int SIZE, const char* filePath);
     void findTaskPriority(toDoList list[], int SIZE, const char* filePath);
+    void findTaskGroup(toDoList list[], int SIZE, const char* filePath);
     void sortByPriority(toDoList list[], int SIZE, const char* filePath, int left, int right);
     //int rewriteFile(toDoList list[], int SIZE, const char* filePath);
     //int removeListElement(toDoList list[], int SIZE, const char* filePath, const char* deletedList);

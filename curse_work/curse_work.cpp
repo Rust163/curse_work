@@ -2,8 +2,8 @@
 #include <iostream>
 #include "windows.h"
 #include "header.h"
-//#define TODO
-#define SONGS
+#define TODO
+//#define SONGS
 using namespace std;
 
 int main()
@@ -44,7 +44,7 @@ int main()
         toDo::showAllList(list, SIZE, filePath);
         break;
     case 3:
-        
+        toDo::findTaskGroup(list, SIZE, filePath);
         break;
     case 4:
         int searchTasks;
@@ -121,7 +121,7 @@ int main()
 #endif // TODO
     
 #ifdef SONGS
-#include "header.h"
+//#include "header.h"
     setlocale(LC_ALL, "rus");
     int SIZE = 5;
     song::Songs song[5];

@@ -18,6 +18,9 @@ namespace toDo {
         }
         else {
             do {
+                cout << "Введите группу задачи(дом, работа, личное): ";
+                cin >> ws;
+                gets_s(list[i].group.character, 50);
                 cout << "Введите загаловок задачи: ";
                 cin >> ws;
                 gets_s(list[i].title, 50);
@@ -35,6 +38,7 @@ namespace toDo {
                 gets_s(list[i].time, 50);
                 cout << "Хотите добавить еще задачу? [1] Да, [0] Нет.";
                 cin >> stop;
+                fprintf(tdAppend, "%s\n", list[i].group.character);
                 fprintf(tdAppend, "%s\n", list[i].title);
                 fprintf(tdAppend, "%i\n", list[i].priority);
                 fprintf(tdAppend, "%s\n", list[i].description);
@@ -57,13 +61,15 @@ namespace toDo {
         }
         //проходим циклом и считываем данные из файла, потом выводим их на экран
         for (int i = 0; i < SIZE; i++) {
+            fgets(list[i].group.character, 50, tdOut);
             fgets(list[i].title, 50, tdOut);
             fscanf(tdOut, "%i\n ", &list[i].priority);
             fgets(list[i].description, 100, tdOut);
             fgets(list[i].date, 50, tdOut);
             fgets(list[i].time, 50, tdOut);
             cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
-            cout << "\tНазвание задачи:" << list[i].title <<
+            cout << "\tНазвание группы:" << list[i].group.character <<
+                     "\nНазвание задачи:" << list[i].title <<
                 "\n       Приоритет задачи:" << list[i].priority <<
                 "\n\tОписание задачи:" << list[i].description <<
                 "\n Дата выполнения задачи:" << list[i].date <<
@@ -76,60 +82,29 @@ namespace toDo {
     void findTaskTitle(toDoList list[], int SIZE, const char* filePath) {
         FILE* td;
         fopen_s(&td, filePath, "r");
-        char title[50];
+        int title;
         
         cout << "\t\tВыберете пункт поиска задачи: ";
         cin >> title;
         for (int i = 0; i < SIZE; i++) {
-            if (strcmp(list[i].title, title) == 0) {
-                /*fgets(list[i].title, 50, td);
+            if (i + 1 == title) {
+                /*fgets(list[i].group.character, 50, td);
+                fgets(list[i].title, 50, td);
                 fscanf(td, "%i\n ", list[i].priority);
                 fgets(list[i].description, 100, td);
                 fgets(list[i].date, 50, td);
                 fgets(list[i].time, 50, td);*/
                 cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
-                cout << "\tНазвание задачи:" << list[i].title <<
+                cout << "\tНазвание группы:" << list[i].group.character <<
+                    "\nНазвание задачи:" << list[i].title <<
                     "\n       Приоритет задачи:" << list[i].priority <<
                     "\n\tОписание задачи:" << list[i].description <<
                     "\n Дата выполнения задачи:" << list[i].date <<
                     "\nВремя выполнения задачи:" << list[i].time << endl;
                 cout << "\n=====================================================================\n";
             }
-            /*else if (list[i].priority == priority) {
-                return i;
-            }
-            else if (list[i].description == descr) {
-                return i;
-            }
-            else if (list[i].date == date) {
-                return i;
-            }*/
         }
         cout << "\t\tТакая задача отсутствует! " << endl;
-        //return -1;
-
-        /* int count = 0;
-         for (int i = 0; i < SIZE; i++) {
-             if (_strcmpi(list[i].title, task) == 0) {
-                 fgets(list[i].title, 50, td);
-                 fscanf(td, "%i\n ", &list[i].priority);
-                 fgets(list[i].description, 100, td);
-                 fgets(list[i].date, 50, td);
-                 fgets(list[i].time, 50, td);
-                 cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
-                 cout << "\tНазвание задачи:" << list[i].title <<
-                     "\n       Приоритет задачи:" << list[i].priority <<
-                     "\n\tОписание задачи:" << list[i].description <<
-                     "\n Дата выполнения задачи:" << list[i].date <<
-                     "\nВремя выполнения задачи:" << list[i].time << endl;
-                 cout << "\n=====================================================================\n";
-                 cout << "Нашел";
-                 count++;
-             }
-             else {
-                 cout << "Не нашел";
-             }
-         }*/
         fclose(td);
     }
 
@@ -147,22 +122,111 @@ namespace toDo {
                 fscanf(td, "%i\n ", &list[i].priority);
                 fgets(list[i].description, 100, td);
                 fgets(list[i].date, 50, td);
-                fgets(list[i].time, 50, td);
+                fgets(list[i].time, 50, td);*/
                 cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
-                cout << "\tНазвание задачи:" << list[i].title <<
+                cout << "\tНазвание группы:" << list[i].group.character <<
+                    "\nНазвание задачи:" << list[i].title <<
                     "\n       Приоритет задачи:" << list[i].priority <<
                     "\n\tОписание задачи:" << list[i].description <<
                     "\n Дата выполнения задачи:" << list[i].date <<
                     "\nВремя выполнения задачи:" << list[i].time << endl;
-                cout << "\n=====================================================================\n";*/
+                cout << "\n=====================================================================\n";
                 cout << "Нашел";
-                count++;
             }
             else {
                 cout << "Не нашел";
             }
         }
         fclose(td);
+    }
+
+    void findTaskGroup(toDoList list[], int SIZE, const char* filePath) {
+        FILE* td;
+        fopen_s(&td, filePath, "r");
+        char taskGroup[50];
+        cout << "\t\tВведите название группы дел: ";
+        cin >> taskGroup;
+        switch (*taskGroup) {
+        case 'Д':
+            for (int i = 0; i < SIZE; i++) {
+                if (list[i].group.character == "Дом") {
+                    fgets(list[i].group.character, 50, td);
+                    fgets(list[i].title, 50, td);
+                    fscanf(td, "%i\n ", &list[i].priority);
+                    fgets(list[i].description, 100, td);
+                    fgets(list[i].date, 50, td);
+                    fgets(list[i].time, 50, td);
+                    cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
+                    cout << "\tНазвание группы:" << list[i].group.character <<
+                        "\nНазвание задачи:" << list[i].title <<
+                        "\n       Приоритет задачи:" << list[i].priority <<
+                        "\n\tОписание задачи:" << list[i].description <<
+                        "\n Дата выполнения задачи:" << list[i].date <<
+                        "\nВремя выполнения задачи:" << list[i].time << endl;
+                    cout << "\n=====================================================================\n";
+                    cout << "Нашел";
+                }
+                else {
+                    cout << "Не нашел";
+                }
+            }
+            break;
+
+        case 'Р':
+            for (int i = 0; i < SIZE; i++) {
+                if (list[i].group.character == taskGroup) {
+                    /*fgets(list[i].title, 50, td);
+                    fscanf(td, "%i\n ", &list[i].priority);
+                    fgets(list[i].description, 100, td);
+                    fgets(list[i].date, 50, td);
+                    fgets(list[i].time, 50, td);*/
+                    cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
+                    cout << "\tНазвание группы:" << list[i].group.character <<
+                        "\nНазвание задачи:" << list[i].title <<
+                        "\n       Приоритет задачи:" << list[i].priority <<
+                        "\n\tОписание задачи:" << list[i].description <<
+                        "\n Дата выполнения задачи:" << list[i].date <<
+                        "\nВремя выполнения задачи:" << list[i].time << endl;
+                    cout << "\n=====================================================================\n";
+                    cout << "Нашел";
+                }
+                else {
+                    cout << "Не нашел";
+                }
+            }
+            break;
+
+        case 'Л':
+            for (int i = 0; i < SIZE; i++) {
+                if (list[i].group.character == taskGroup) {
+                    /*fgets(list[i].title, 50, td);
+                    fscanf(td, "%i\n ", &list[i].priority);
+                    fgets(list[i].description, 100, td);
+                    fgets(list[i].date, 50, td);
+                    fgets(list[i].time, 50, td);*/
+                    cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
+                    cout << "\tНазвание группы:" << list[i].group.character <<
+                        "\nНазвание задачи:" << list[i].title <<
+                        "\n       Приоритет задачи:" << list[i].priority <<
+                        "\n\tОписание задачи:" << list[i].description <<
+                        "\n Дата выполнения задачи:" << list[i].date <<
+                        "\nВремя выполнения задачи:" << list[i].time << endl;
+                    cout << "\n=====================================================================\n";
+                    cout << "Нашел";
+                }
+                else {
+                    cout << "Не нашел";
+                }
+            }
+            break;
+
+        default:
+            break;
+
+
+
+            fclose(td);
+        }
     }
 
     void sortByPriority(toDoList list[], int SIZE, const char* filePath, int left, int right) {
@@ -205,16 +269,16 @@ namespace toDo {
             fgets(list[i].date, 50, tdSort);
             fgets(list[i].time, 50, tdSort);
             cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
-            cout << "\tНазвание задачи:" << list[i].title <<
+            cout << "\tНазвание группы:" << list[i].group.character <<
+                "\nНазвание задачи:" << list[i].title <<
                 "\n       Приоритет задачи:" << list[i].priority <<
                 "\n\tОписание задачи:" << list[i].description <<
                 "\n Дата выполнения задачи:" << list[i].date <<
                 "\nВремя выполнения задачи:" << list[i].time << endl;
             cout << "\n=====================================================================\n";
 
-            fclose(tdSort);
         }
-        
+        fclose(tdSort);
     }
 
     /* ФУНКЦИЯ ПЕРЕЗАПИСИ ФАЙЛА
