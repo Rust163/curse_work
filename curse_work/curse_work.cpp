@@ -2,16 +2,19 @@
 #include <iostream>
 #include "windows.h"
 #include "header.h"
+#define TODO
+//#define SONGS
 using namespace std;
 
 int main()
 {
     setlocale(LC_ALL, "rus");
+#ifdef TODO
     //const int* SIZE = new int[255]{ 0 };
     int SIZE = 5;
     int left = 0;
     int right = 0;
-    toDo::toDoList list[5];
+    toDo::toDoList task[5];
     const char* filePath = "ToDo_list.txt";
     const char* deletedList = "ToDo_list_deleted.txt";
 
@@ -25,60 +28,68 @@ int main()
     cout << "\n---------------------------------------Menu---------------------------------------\n";
 
     cout << "[1] Добавить задачи.\n";
-    cout << "[2] Показать полный список задач.\n";
-    cout << "[3] Редактировать задачу.\n";
-    cout << "[4] Поиск дел по:\n";
-    cout << "[5] Сортировка списка задач по:\n";
-    cout << "[6] Отображение списка дел:\n";
+    cout << "[2] Удалить задачу.\n";
+    cout << "[3] Показать полный список задач.\n";
+    cout << "[4] Редактировать задачу.\n";
+    cout << "[5] Поиск дел по:\n";
+    cout << "[6] Сортировка списка задач по:\n";
+    cout << "[7] Отображение списка дел:\n";
     int changeMenu = 0;
     cout << "Введите порядковый номер меню: ";
     cin >> changeMenu;
     switch (changeMenu) {
     case 1:
-        toDo::appendTasks(list, SIZE, filePath);
+        toDo::appendTasks(task, SIZE, filePath);
         break;
     case 2:
-        toDo::showAllList(list, SIZE, filePath);
+        toDo::removeListElement(task, SIZE, filePath);
         break;
     case 3:
-        
+        toDo::showAllList(task, SIZE, filePath);
         break;
     case 4:
+        
+        break;
+    case 5:
         int searchTasks;
-        cout << "Выберете пункт поиска дел по... \n\t[1]Названию, \n\t[2]Приоритету, \n\t[3]Описанию, \n\t[4]Дате и времени" << endl;
+        cout << "Выберете пункт поиска дел по... \n\t[1]Названию, \n\t[2]Приоритету, \n\t[3]Описанию, \n\t[4]Дате и времени, \n\t[5]По группе(Дом, Работа, Личное)" << endl;
         cout << "\tВаш выбор: ";
         cin >> searchTasks;
         switch (searchTasks) {
         case 1:
             cout << "\t\tПоиск по названию." << endl;
-            toDo::findTaskTitle(list, SIZE, filePath);
+            toDo::findTaskTitle(task, SIZE, filePath);
             break;
         case 2:
             cout << "\t\tПоиск по приоритету: " << endl;
-            toDo::findTaskPriority(list, SIZE, filePath);
+            toDo::findTaskPriority(task, SIZE, filePath);
             break;
         case 3:
-            cout << "Поиск по описанию: " << endl;
-
+            cout << "\t\tПоиск по описанию: " << endl;
+            toDo::findTaskDescription(task, SIZE, filePath);
             break;
         case 4:
-            cout << "Поиск по дате и времени: " << endl;
-
+            cout << "\t\tПоиск по дате и времени: " << endl;
+            toDo::findTaskToDate(task, SIZE, filePath);
+            break;
+        case 5:
+            int taskGroup;
+            cout << "\t\tПоиск по группе([1]Дом, [2]Работа, [3]Личное): " << endl;
+            toDo::findTaskGroup(task, SIZE, filePath);
             break;
         default:
             break;
         }
-        //toDo::removeListElement(list, SIZE, filePath, deletedList);
         break;
-    case 5:
+    case 6:
         int sortChange;
         cout << "\t\tСортировка задач по ...\n\t\t [1]Приоритету.\n\t\t [2]По дате и времени" << endl;
         cout << "\t\tВыберете пункт: ";
         cin >> sortChange;
         switch (sortChange) {
         case 1:
-            cout << "\t\t\tВы выбрале по приоритету" << endl;
-            toDo:: sortByPriority(list, SIZE, filePath, left, right);
+            cout << "\t\t\tВы выбрали по приоритету" << endl;
+            toDo:: sortByPriority(task, SIZE, filePath, left, right);
             break;
         case 2:
             cout << "\t\t\tВы выбрале по дате и времени" << endl;
@@ -87,22 +98,22 @@ int main()
         default:
             break;
         }
-    case 6:
+    case 7:
         int dispList;
-        cout << "Отображение списка дел на [1]День, [2]Неделю, [3]Месяц" << endl;
-        cout << "Введите вариант выбора: ";
+        cout << "\t\tОтображение списка дел на [1]День, [2]Неделю, [3]Месяц" << endl;
+        cout << "\t\tВведите вариант выбора: ";
         cin >> dispList;
         switch (dispList) {
         case 1:
-            cout << "Список дел на день: " << endl;
-
+            cout << "\t\t\tСписок дел на день: " << endl;
+            toDo::toDoListForTheDay(task, SIZE, filePath);
             break;
         case 2:
-            cout << "Список дел на неделю: " << endl;
+            cout << "\t\t\tСписок дел на неделю: " << endl;
 
             break;
         case 3:
-            cout << "Список дел на месяц: " << endl;
+            cout << "\t\t\tСписок дел на месяц: " << endl;
 
             break;
         default:
@@ -114,5 +125,55 @@ int main()
     default:
         break;
     }
+
+#endif // TODO
     
+#ifdef SONGS
+//#include "header.h"
+    setlocale(LC_ALL, "rus");
+    int SIZE = 5;
+    song::Songs song[5];
+    const char* songFile = "Songs.txt";
+
+    cout << "\n++++++++++++++++++++++++++++++++++Сборник песен!++++++++++++++++++++++++++++++++++\n";
+    cout << "\n---------------------------------------MENU---------------------------------------\n";
+    cout << "[1]Добавление текста песни\n" <<
+        "[2]Удаление текста песни\n" <<
+        "[3]Изменение текста песни\n" <<
+        "[4]Отображение текста песни на экран\n" <<
+        "[5]Поиск и отображение всех песен одного автора\n" <<
+        "[6]Поиск песен по слову" << endl;
+    int choiseMenu;
+    cout << "Вы берите пункт меню: ";
+    cin >> choiseMenu;
+    switch (choiseMenu) {
+    case 1:
+        cout << "Введите название автора, текст песни и год издания." << endl;
+        song::addSongs(song, SIZE, songFile);
+        break;
+    case 2:
+        cout << "";
+
+        break;
+    case 3:
+        cout << "";
+
+        break;
+    case 4:
+        cout << "";
+        song::showAllSongs(song, SIZE, songFile);
+        break;
+    case 5:
+        cout << "Поиск и отображение всех песен одного автора" << endl;
+        song::findSongAuthor(song, SIZE, songFile);
+        break;
+    case 6:
+        cout << "Поиск песен по введеному слову.";
+        song::findWordInTheSong(song, SIZE, songFile);
+        break;
+    default:
+        break;
+    }
+#endif // SONGS
+
 }
