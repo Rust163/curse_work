@@ -14,16 +14,17 @@ namespace toDo {
         char time[50];
     };
 
-    //void addList(toDoList list[], int SIZE, const char* filePath);
-    void showAllList(toDoList list[], int SIZE, const char* filePath);
+    //void addList(toDoList task[], int SIZE, const char* filePath);
+    void showAllList(toDoList task[], int SIZE, const char* filePath);
     void appendTasks(toDoList list[], int SIZE, const char* filePath);
     void findTaskTitle(toDoList list[], int SIZE, const char* filePath);
     void findTaskPriority(toDoList list[], int SIZE, const char* filePath);
     void findTaskGroup(toDoList list[], int SIZE, const char* filePath);
     void sortByPriority(toDoList list[], int SIZE, const char* filePath, int left, int right);
-    //int rewriteFile(toDoList list[], int SIZE, const char* filePath);
-    //int removeListElement(toDoList list[], int SIZE, const char* filePath, const char* deletedList);
-    //void showBasket(toDoList list[], int SIZE, const char* deletedList);
+    void toDoListForTheDay(toDoList list[], int SIZE, const char* filePath);
+    //int rewriteFile(toDoList task[], int SIZE, const char* filePath);
+    //int removeListElement(toDoList task[], int SIZE, const char* filePath, const char* deletedList);
+    //void showBasket(toDoList task[], int SIZE, const char* deletedList);
 }
 
 namespace song {
@@ -37,4 +38,5 @@ namespace song {
     void addSongs(Songs song[], int SIZE, const char* songFile);
     void showAllSongs(Songs song[], int SIZE, const char* songFile);
     void findSongAuthor(Songs song[], int SIZE, const char* songFile);
+    void findWordInTheSong(Songs song[], int SIZE, const char* songFile);
 }
