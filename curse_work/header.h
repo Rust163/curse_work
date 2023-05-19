@@ -15,10 +15,13 @@ namespace toDo {
     };
 
     //void addList(toDoList task[], int SIZE, const char* filePath);
-    void showAllList(toDoList task[], int SIZE, const char* filePath);
     void appendTasks(toDoList list[], int SIZE, const char* filePath);
-    void findTaskTitle(toDoList list[], int SIZE, const char* filePath);
+    int removeListElement(toDoList task[], int SIZE, const char* filePath);
+    void showAllList(toDoList task[], int SIZE, const char* filePath);
+    int findTaskTitle(toDoList list[], int SIZE, const char* filePath);
     void findTaskPriority(toDoList list[], int SIZE, const char* filePath);
+    int findTaskDescription(toDoList task[], int SIZE, const char* filePath);
+    int findTaskToDate(toDoList task[], int SIZE, const char* filePath);
     void findTaskGroup(toDoList list[], int SIZE, const char* filePath);
     void sortByPriority(toDoList list[], int SIZE, const char* filePath, int left, int right);
     void toDoListForTheDay(toDoList list[], int SIZE, const char* filePath);

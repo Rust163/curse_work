@@ -80,16 +80,17 @@ namespace toDo {
         fclose(tdOut);
     }
 
-    void findTaskTitle(toDoList task[], int SIZE, const char* filePath) {
+    int findTaskTitle(toDoList task[], int SIZE, const char* filePath) {
         FILE* tdT;
         fopen_s(&tdT, filePath, "rb");
         char titleTask[50];
+        if (tdT == NULL) {
+            cout << "Error, file 'ToDo_list.txt' not open!\n";
+            return 1;
+        }
         cout << "\t\tВведите название для поиска задачи: ";
         cin >> ws;
         gets_s(titleTask, 50);
-        if (!tdT) {
-            cout << "Error, file 'ToDo_list.txt' not open!\n";
-        }
         for (int i = 0; i < SIZE; i++) {
             fgets(task[i].group.character, 50, tdT);
             fgets(task[i].title, 50, tdT);
@@ -97,10 +98,7 @@ namespace toDo {
             fgets(task[i].description, 100, tdT);
             fgets(task[i].date, 50, tdT);
             fgets(task[i].time, 50, tdT);
-            if (!strcmp(task[i].title, titleTask)) {
-                cout << "\t\tТакая задача отсутствует! " << endl;
-            }
-            else {
+            if (strcmp(task[i].title, titleTask) == 0) {
                 cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
                 cout << "\tНазвание группы:" << task[i].group.character <<
                     "\n\tНазвание задачи:" << task[i].title <<
@@ -109,6 +107,10 @@ namespace toDo {
                     "\n Дата выполнения задачи:" << task[i].date <<
                     "\nВремя выполнения задачи:" << task[i].time << endl;
                 cout << "\n=====================================================================\n";
+                return 0;
+            }
+            else {
+                cout << "\t\tТакая задача отсутствует! " << endl;
             }
         }
         fclose(tdT);
@@ -133,7 +135,6 @@ namespace toDo {
                 fgets(task[i].date, 50, td);
                 fgets(task[i].time, 50, td);
                 if (task[i].priority == taskPrior) { // в этом условии мы проверяем каждую строку с нашим введеном искомым значение и как только нашли, то выводим иноформацию (см. ниже код с выводом)
-                  
                     cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
                     cout << "\tНазвание группы:" << task[i].group.character <<
                         "\n\tНазвание задачи:" << task[i].title <<
@@ -151,6 +152,78 @@ namespace toDo {
         fclose(td); // после открытия файла и работы с ним необходимо его закрыть во избежании утечки памяти
     }
 
+    int findTaskDescription(toDoList task[], int SIZE, const char* filePath) {
+        FILE* tdT;
+        fopen_s(&tdT, filePath, "rb");
+        char descriptionTask[50];
+        if (tdT == NULL) {
+            cout << "Error, file 'ToDo_list.txt' not open!\n";
+            return 1;
+        }
+        cout << "\t\tВведите слово для поиска описания задачи: ";
+        cin >> ws;
+        gets_s(descriptionTask, 50);
+        for (int i = 0; i < SIZE; i++) {
+            fgets(task[i].group.character, 50, tdT);
+            fgets(task[i].title, 50, tdT);
+            fscanf(tdT, "%i\n ", &task[i].priority);
+            fgets(task[i].description, 100, tdT);
+            fgets(task[i].date, 50, tdT);
+            fgets(task[i].time, 50, tdT);
+            if (strcmp(task[i].title, descriptionTask) == 0) {
+                cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
+                cout << "\tНазвание группы:" << task[i].group.character <<
+                    "\n\tНазвание задачи:" << task[i].title <<
+                    "\n       Приоритет задачи:" << task[i].priority <<
+                    "\n\tОписание задачи:" << task[i].description <<
+                    "\n Дата выполнения задачи:" << task[i].date <<
+                    "\nВремя выполнения задачи:" << task[i].time << endl;
+                cout << "\n=====================================================================\n";
+                return 0;
+            }
+            else {
+                cout << "\t\tТакая задача отсутствует! " << endl;
+            }
+        }
+        fclose(tdT);
+    }
+
+    int findTaskToDate(toDoList task[], int SIZE, const char* filePath) {
+        FILE* tdT;
+        fopen_s(&tdT, filePath, "rb");
+        char dateTask[50];
+        if (tdT == NULL) {
+            cout << "Error, file 'ToDo_list.txt' not open!\n";
+            return 1;
+        }
+        cout << "\t\tВведите дату для поиска задачи: ";
+        cin >> ws;
+        gets_s(dateTask, 50);
+        for (int i = 0; i < SIZE; i++) {
+            fgets(task[i].group.character, 50, tdT);
+            fgets(task[i].title, 50, tdT);
+            fscanf(tdT, "%i\n ", &task[i].priority);
+            fgets(task[i].description, 100, tdT);
+            fgets(task[i].date, 50, tdT);
+            fgets(task[i].time, 50, tdT);
+            if (strcmp(task[i].title, dateTask) == 0) {
+                cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
+                cout << "\tНазвание группы:" << task[i].group.character <<
+                    "\n\tНазвание задачи:" << task[i].title <<
+                    "\n       Приоритет задачи:" << task[i].priority <<
+                    "\n\tОписание задачи:" << task[i].description <<
+                    "\n Дата выполнения задачи:" << task[i].date <<
+                    "\nВремя выполнения задачи:" << task[i].time << endl;
+                cout << "\n=====================================================================\n";
+                return 0;
+            }
+            else {
+                cout << "\t\tТакая задача отсутствует! " << endl;
+            }
+        }
+        fclose(tdT);
+    }
+
     void findTaskGroup(toDoList task[], int SIZE, const char* filePath) {
         FILE* td;
         fopen_s(&td, filePath, "rb");
@@ -164,7 +237,7 @@ namespace toDo {
             fgets(task[i].description, 100, td);
             fgets(task[i].date, 50, td);
             fgets(task[i].time, 50, td);
-            if (task[i].group.character == taskGroupFind) {
+            if (strcmp(task[i].group.character, taskGroupFind) == 0) {
                 cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
                 cout << "\tНазвание группы:" << task[i].group.character <<
                     "\nНазвание задачи:" << task[i].title <<
@@ -256,79 +329,104 @@ namespace toDo {
         fclose(tdRW);
     }*/
 
-    /* ФУНКЦИЯ УДАЛЕНИЯ ЭЛЕМЕНТА ИЗ ФАЙЛА С ВЫЗОВОМ ФУНКЦИИ ПОИСКА И ДАЛЬНЕЙШЕЙ ПЕРЕЗАПИСИ
-    int removeListElement(toDoList task[], int SIZE, const char* filePath, const char* deletedList) {
-        FILE* tdOut;
-        fopen_s(&tdOut, filePath, "wb");
-        char task[50];
+     //ФУНКЦИЯ УДАЛЕНИЯ ЭЛЕМЕНТА ИЗ ФАЙЛА С ВЫЗОВОМ ФУНКЦИИ ПОИСКА И ДАЛЬНЕЙШЕЙ ПЕРЕЗАПИСИ
+    int removeListElement(toDoList task[], int SIZE, const char* filePath) {
+        FILE* td;
+        fopen_s(&td, filePath, "wb");
+        char findRemoveTask[50];
         cout << "Введите искомое название для удаления из списка дел: ";
-        cin >> task;
-        int position = findTask(task, SIZE, filePath, task);
-        if (!tdOut) {
+        cin >> findRemoveTask;
+        int stop = 2;
+        if (!td) {
             cout << "Ошибка открытия файла!";
             return -1;
         }
-        if (position == -1) {
-            cout << "Запись не наидена!";
-        }
-        SIZE--;
-        cout << "Запись удалена.";
-        rewriteFile(task, SIZE, filePath);
-        fclose(tdOut);
-    }*/
-    /* ФУНКЦИЯ УДАЛЕНИЯ ЭЛЕМЕНТА С ПЕРЕЗАПИСЬЮ УДАЛЕННОЙ ЗАПИСИ В ФАЙЛ КОРЗИНУ
-    int removeListElement(toDoList task[], int SIZE, const char* filePath, const char* deletedList) {
-        FILE* tdDel;
-        FILE* tdOut;
-        fopen_s(&tdDel, deletedList, "w");
-        fopen_s(&tdOut, filePath, "a");
-        char findRemovTasks[50];
-        cout << "Введите название задачи для поиска: ";
-        cin >> findRemovTasks;
-        for (int i = 0; i < 5; i++) {
-            if (findRemovTasks == task[i].title) {
-                fprintf(tdDel, "%s\n ", task[i].title);
-                fprintf(tdDel, "%i\n ", task[i].priority);
-                fprintf(tdDel, "%s\n ", task[i].description);
-                fprintf(tdDel, "%s\n ", task[i].date);
-                fprintf(tdDel, "%s\n ", task[i].time);
-                cout << "Задача удалена в корзину!";
+        do {
+            for (int i = 0; i < SIZE; i++) {
+                fgets(task[i].group.character, 50, td);
+                fgets(task[i].title, 50, td);
+                fscanf(td, "%i\n ", &task[i].priority);
+                fgets(task[i].description, 100, td);
+                fgets(task[i].date, 50, td);
+                fgets(task[i].time, 50, td);
+                if (strcmp(task[i].title, findRemoveTask) == 0) {
+                    remove(task[i - 1].title);
+                    cout << "Запись удалена.";
+                    cout << "\n===================================" << "Запись №" << i + 1 << "=======================================\n";
+                    cout << "\tНазвание группы:" << task[i].group.character <<
+                        "\nНазвание задачи:" << task[i].title <<
+                        "\n       Приоритет задачи:" << task[i].priority <<
+                        "\n\tОписание задачи:" << task[i].description <<
+                        "\n Дата выполнения задачи:" << task[i].date <<
+                        "\nВремя выполнения задачи:" << task[i].time << endl;
+                    cout << "\n=====================================================================\n";
+                }
+                cout << "\nЗапись не найдена.";
+            }
+            cout << "\nХотите удалить еще задачу? [1] Да, [0] Нет";
+            cin >> stop;
+            if (stop == 1) {
+                removeListElement(task, SIZE, filePath);
             }
             else {
-                fprintf(tdOut, "%s\n ", task[i].title);
-                fprintf(tdOut, "%i\n ", task[i].priority);
-                fprintf(tdOut, "%s\n ", task[i].description);
-                fprintf(tdOut, "%s\n ", task[i].date);
-                fprintf(tdOut, "%s\n ", task[i].time);
-                cout << "Основной файл перезаписан!";
+                return 0;
             }
-        }
-        fclose(tdDel);
-        fclose(tdOut);
+        } while (stop != 0);
+        fclose(td);
     }
-    ФАЙЛ КОРЗИНА
-    void showBasket(toDoList task[], int SIZE, const char* deletedList) {
-        FILE* tdDel;
-        fopen_s(&tdDel, deletedList, "r");
-        int choise;
-        cout << "\nПосмотреть содержимое корзины? 1) Да     2) Нет";
-        cin >> choise;
-        if (choise == 1) {
-            for (int i = 0; i < 2; i++) {
-                fgets(task[i].title, 50, tdDel);
-                fscanf(tdDel, "%i\n ", task[i].priority);
-                fgets(task[i].description, 50, tdDel);
-                fgets(task[i].date, 50, tdDel);
-                fgets(task[i].time, 50, tdDel);
-                cout << "\tНазвание задачи:" << task[i].title <<
-                    "\n       Приоритет задачи:" << task[i].priority <<
-                    "\n\tОписание задачи:" << task[i].description <<
-                    "\n Дата выполнения задачи:" << task[i].date <<
-                    "\nВремя выполнения задачи:" << task[i].time << endl;
-            }
-        }
-        fclose(tdDel);
-    }*/
+    // ФУНКЦИЯ УДАЛЕНИЯ ЭЛЕМЕНТА С ПЕРЕЗАПИСЬЮ УДАЛЕННОЙ ЗАПИСИ В ФАЙЛ КОРЗИНУ
+    //int removeListElement(toDoList task[], int SIZE, const char* filePath, const char* deletedList) {
+    //    FILE* tdDel;
+    //    FILE* tdOut;
+    //    fopen_s(&tdDel, deletedList, "w");
+    //    fopen_s(&tdOut, filePath, "a");
+    //    char findRemovTasks[50];
+    //    cout << "Введите название задачи для поиска: ";
+    //    cin >> findRemovTasks;
+    //    for (int i = 0; i < 5; i++) {
+    //        if (findRemovTasks == task[i].title) {
+    //            fprintf(tdDel, "%s\n ", task[i].title);
+    //            fprintf(tdDel, "%i\n ", task[i].priority);
+    //            fprintf(tdDel, "%s\n ", task[i].description);
+    //            fprintf(tdDel, "%s\n ", task[i].date);
+    //            fprintf(tdDel, "%s\n ", task[i].time);
+    //            cout << "Задача удалена в корзину!";
+    //        }
+    //        else {
+    //            fprintf(tdOut, "%s\n ", task[i].title);
+    //            fprintf(tdOut, "%i\n ", task[i].priority);
+    //            fprintf(tdOut, "%s\n ", task[i].description);
+    //            fprintf(tdOut, "%s\n ", task[i].date);
+    //            fprintf(tdOut, "%s\n ", task[i].time);
+    //            cout << "Основной файл перезаписан!";
+    //        }
+    //    }
+    //    fclose(tdDel);
+    //    fclose(tdOut);
+    //}
+    ////ФАЙЛ КОРЗИНА
+    //void showBasket(toDoList task[], int SIZE, const char* deletedList) {
+    //    FILE* tdDel;
+    //    fopen_s(&tdDel, deletedList, "r");
+    //    int choise;
+    //    cout << "\nПосмотреть содержимое корзины? 1) Да     2) Нет";
+    //    cin >> choise;
+    //    if (choise == 1) {
+    //        for (int i = 0; i < 2; i++) {
+    //            fgets(task[i].title, 50, tdDel);
+    //            fscanf(tdDel, "%i\n ", task[i].priority);
+    //            fgets(task[i].description, 50, tdDel);
+    //            fgets(task[i].date, 50, tdDel);
+    //            fgets(task[i].time, 50, tdDel);
+    //            cout << "\tНазвание задачи:" << task[i].title <<
+    //                "\n       Приоритет задачи:" << task[i].priority <<
+    //                "\n\tОписание задачи:" << task[i].description <<
+    //                "\n Дата выполнения задачи:" << task[i].date <<
+    //                "\nВремя выполнения задачи:" << task[i].time << endl;
+    //        }
+    //    }
+    //    fclose(tdDel);
+    //}
 
     void toDoListForTheDay(toDoList task[], int SIZE, const char* filePath) {
         FILE* td;

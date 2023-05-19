@@ -28,11 +28,12 @@ int main()
     cout << "\n---------------------------------------Menu---------------------------------------\n";
 
     cout << "[1] Добавить задачи.\n";
-    cout << "[2] Показать полный список задач.\n";
-    cout << "[3] Редактировать задачу.\n";
-    cout << "[4] Поиск дел по:\n";
-    cout << "[5] Сортировка списка задач по:\n";
-    cout << "[6] Отображение списка дел:\n";
+    cout << "[2] Удалить задачу.\n";
+    cout << "[3] Показать полный список задач.\n";
+    cout << "[4] Редактировать задачу.\n";
+    cout << "[5] Поиск дел по:\n";
+    cout << "[6] Сортировка списка задач по:\n";
+    cout << "[7] Отображение списка дел:\n";
     int changeMenu = 0;
     cout << "Введите порядковый номер меню: ";
     cin >> changeMenu;
@@ -41,12 +42,15 @@ int main()
         toDo::appendTasks(task, SIZE, filePath);
         break;
     case 2:
-        toDo::showAllList(task, SIZE, filePath);
+        toDo::removeListElement(task, SIZE, filePath);
         break;
     case 3:
-        
+        toDo::showAllList(task, SIZE, filePath);
         break;
     case 4:
+        
+        break;
+    case 5:
         int searchTasks;
         cout << "Выберете пункт поиска дел по... \n\t[1]Названию, \n\t[2]Приоритету, \n\t[3]Описанию, \n\t[4]Дате и времени, \n\t[5]По группе(Дом, Работа, Личное)" << endl;
         cout << "\tВаш выбор: ";
@@ -62,11 +66,11 @@ int main()
             break;
         case 3:
             cout << "\t\tПоиск по описанию: " << endl;
-
+            toDo::findTaskDescription(task, SIZE, filePath);
             break;
         case 4:
             cout << "\t\tПоиск по дате и времени: " << endl;
-
+            toDo::findTaskToDate(task, SIZE, filePath);
             break;
         case 5:
             int taskGroup;
@@ -76,9 +80,8 @@ int main()
         default:
             break;
         }
-        //toDo::removeListElement(list, SIZE, filePath, deletedList);
         break;
-    case 5:
+    case 6:
         int sortChange;
         cout << "\t\tСортировка задач по ...\n\t\t [1]Приоритету.\n\t\t [2]По дате и времени" << endl;
         cout << "\t\tВыберете пункт: ";
@@ -95,7 +98,7 @@ int main()
         default:
             break;
         }
-    case 6:
+    case 7:
         int dispList;
         cout << "\t\tОтображение списка дел на [1]День, [2]Неделю, [3]Месяц" << endl;
         cout << "\t\tВведите вариант выбора: ";
@@ -166,7 +169,7 @@ int main()
         break;
     case 6:
         cout << "Поиск песен по введеному слову.";
-        song::findWordInTheSong(Songs song[], int SIZE, const char* songFile);
+        song::findWordInTheSong(song, SIZE, songFile);
         break;
     default:
         break;
